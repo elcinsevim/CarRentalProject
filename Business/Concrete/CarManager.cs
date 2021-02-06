@@ -11,15 +11,45 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _carDal;
 
+        private ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
+        public void Add(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
+        }
+
+        public List<Car> GetByBrandId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Car> GetByColorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car GetById(int ıd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Car car)
+        {
+            throw new NotImplementedException();
         }
     }
 }
