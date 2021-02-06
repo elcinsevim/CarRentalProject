@@ -16,28 +16,44 @@ namespace Business.Concrete
         }
 
         public void Add(Brand brand)
-        {
-            throw new NotImplementedException();
+        { 
+        if (brand.Name.Length > 2)
+            {
+                _brandDal.Add(brand);
+                Console.WriteLine("new brand is added to the system");
+            }
+            else
+            {
+                Console.WriteLine("The new brand could not be added to the system, it does not meet the criteria.");
+            }
+            
+            
         }
 
         public void Delete(Brand brand)
         {
-            throw new NotImplementedException();
+            _brandDal.Delete(brand);
+           
         }
-
         public List<Brand> GetAll()
         {
-            throw new NotImplementedException();
+            return _brandDal.GetAll();
         }
 
-        public Brand GetById(int ıd)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Update(Brand brand)
         {
-            throw new NotImplementedException();
+            if (brand.Name.Length > 2)
+            {
+                _brandDal.Update(brand);
+                Console.WriteLine("Marka sistemde basariyla guncellendi.");
+            }
+            else
+            {
+                Console.WriteLine("Lutfen marka ismini en az iki karakter olacak sekilde giriniz.");
+            }
+
         }
     }
 }

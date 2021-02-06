@@ -11,20 +11,36 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
+        ICarDal _carDal;
 
-        private ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
+
         public void Add(Car car)
         {
-            throw new NotImplementedException();
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+                Console.WriteLine("Arac Sisteme basariyla eklendi.");
+            }
+            else
+            {
+                Console.WriteLine("Lutfen aracin gunluk kirasini sifirdan buyuk bir deger giriniz.");
+            }
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
+            Console.WriteLine("Araba sistemde basariyla guncellendi.");
         }
 
         public void Delete(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Delete(car);
+            Console.WriteLine("Araba sistemden basariyla silindi.");
         }
 
         public List<Car> GetAll()
@@ -32,25 +48,23 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetByBrandId(int id)
+        
+
+        public List<Car> GetCarsByColorId(int id)
         {
-            throw new NotImplementedException();
+            return _carDal.GetAll(p => p.ColorId == id);
         }
 
-        public List<Car> GetByColorId(int id)
+        public List<Car> GetCarsByBrandId(int id)
         {
-            throw new NotImplementedException();
+            return _carDal.GetAll(p => p.BrandId == id);
         }
 
-        public Car GetById(int ıd)
+        public List<Car> GetByDailyPrice(decimal min, decimal max)
         {
-            throw new NotImplementedException();
+            return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
         }
 
-        public void Update(Car car)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
-

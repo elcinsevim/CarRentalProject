@@ -1,12 +1,10 @@
 ﻿using DataAccess.Abstract;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -35,18 +33,12 @@ namespace DataAccess.Concrete.EntityFramework
             using (CarRentalContext context = new CarRentalContext())
             {
                 return expressionFilter == null
-                    ? context.Color.ToList()
-                    : context.Color.Where(expressionFilter).ToList();
-            }
+                    ? context.Colors.ToList()
+                    : context.Colors.Where(expressionFilter).ToList();
+            };
         }
 
-        public Color GetById(Expression<Func<Color, bool>> expressionFilter)
-        {
-            using (CarRentalContext context = new CarRentalContext())
-            {
-                return context.Color.SingleOrDefault(expressionFilter);
-            }
-        }
+
 
         public void Update(Color entity)
         {
