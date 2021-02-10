@@ -7,4 +7,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BrandId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="22a5a85e-9849-4989-bad0-255a4043a578" ChangeDateTime="02/10/2021 10:26:23">
+    <Property Name="ElementName" Value="[dbo].[Cars].[Car]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Cars]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CarId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7ab6f363-f045-4d57-90a3-4b05c392bd9d" ChangeDateTime="02/10/2021 10:27:16">
+    <Property Name="ElementName" Value="[dbo].[Colors].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Colors]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ColorId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="394a4b99-7773-454a-b8ea-6000d81597e9" ChangeDateTime="02/10/2021 10:27:20">
+    <Property Name="ElementName" Value="[dbo].[Colors].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Colors]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ColorName" />
+  </Operation>
 </Operations>

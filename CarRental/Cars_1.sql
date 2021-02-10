@@ -4,5 +4,7 @@
     [ ColorId] INT NULL, 
     [ModelYear] NCHAR(10) NULL, 
     [DailyPrice] INT NULL, 
-    [Description] NCHAR(10) NULL
+    [Description] NCHAR(10) NULL, 
+    [CarId] INT NULL, 
+    [CarName] NCHAR(10) NULL
 )

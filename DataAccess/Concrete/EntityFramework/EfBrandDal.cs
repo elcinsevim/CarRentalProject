@@ -34,6 +34,11 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public Brand Get(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Brand> GetAll(Expression<Func<Brand, bool>> expressionFilter = null)
         {
             using (CarRentalContext context = new CarRentalContext())
@@ -46,10 +51,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Brand GetById(System.Linq.Expressions.Expression<Func<Brand, bool>> expressionFilter)
         {
-            using (CarRentalContext context = new CarRentalContext())
-            {
-                return context.Set<Brand>().SingleOrDefault(expressionFilter);
-            }
+            throw new NotImplementedException();
         }
 
         public void Update(Brand entity)

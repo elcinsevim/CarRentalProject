@@ -23,24 +23,19 @@ namespace Business.Concrete
             if (car.DailyPrice > 0)
             {
                 _carDal.Add(car);
-                Console.WriteLine("Arac Sisteme basariyla eklendi.");
+                Console.WriteLine("Araba sisteme eklendi");
             }
             else
             {
-                Console.WriteLine("Lutfen aracin gunluk kirasini sifirdan buyuk bir deger giriniz.");
+                Console.WriteLine("günlük limit 0 dan büyük olmalıdır.");
             }
-        }
-
-        public void Update(Car car)
-        {
-            _carDal.Update(car);
-            Console.WriteLine("Araba sistemde basariyla guncellendi.");
         }
 
         public void Delete(Car car)
         {
             _carDal.Delete(car);
-            Console.WriteLine("Araba sistemden basariyla silindi.");
+            Console.WriteLine("Araba sistemden silindi");
+
         }
 
         public List<Car> GetAll()
@@ -48,23 +43,45 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        
-
-        public List<Car> GetCarsByColorId(int id)
+        public List<Car> GetAllByBrandId(int id)
         {
-            return _carDal.GetAll(p => p.ColorId == id);
+            return _carDal.GetAll(c => c.BrandId == id);
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public List<Car> GetAllByColorId(int id)
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+            return _carDal.GetAll(c => c.ColorId == id);
+
         }
 
         public List<Car> GetByDailyPrice(decimal min, decimal max)
         {
-            return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
+            return _carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
+
         }
 
-        
+        public Car GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public List<Car> GetByModelYear(string year)
+        {
+            return _carDal.GetAll(c => c.ModelYear.Contains(year) == true);
+        }
+
+        public void Update(Car car)
+        {
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Update(car);
+                Console.WriteLine("Araba bilgisi sistemde güncellendi");
+            }
+            else
+            {
+                Console.WriteLine("günlük limit 0 dan büyük olmalı");
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var deleteedEntity = context.Entry(entity);
                 deleteedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
             }
         }
 
@@ -41,10 +42,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Car GetById(Expression<Func<Car, bool>> expressionFilter)
         {
-            using (CarRentalContext context = new CarRentalContext())
-            {
-                return context.Set<Car>().SingleOrDefault(expressionFilter);
-            }
+            throw new NotImplementedException();
 
         }
 
@@ -54,6 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }

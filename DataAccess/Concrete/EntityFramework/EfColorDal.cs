@@ -16,6 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
+                context.SaveChanges();
             }
         }
 
@@ -25,6 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var deleteedEntity = context.Entry(entity);
                 deleteedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
             }
         }
 
@@ -33,8 +35,8 @@ namespace DataAccess.Concrete.EntityFramework
             using (CarRentalContext context = new CarRentalContext())
             {
                 return expressionFilter == null
-                    ? context.Colors.ToList()
-                    : context.Colors.Where(expressionFilter).ToList();
+                    ? context.Set<Color>().ToList():
+                     context.Set<Color>().Where(expressionFilter).ToList();
             };
         }
 
@@ -46,6 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }

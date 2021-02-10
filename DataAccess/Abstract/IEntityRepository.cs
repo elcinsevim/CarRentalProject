@@ -10,8 +10,8 @@ namespace DataAccess.Abstract
    
     {
         List<T> GetAll(Expression<Func<T, bool>> expressionFilter = null);
-
        
+
 
         void Add(T entity);
         void Update(T entity);

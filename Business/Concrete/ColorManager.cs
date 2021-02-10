@@ -32,7 +32,11 @@ namespace Business.Concrete
             return _colorDal.GetAll();
         }
 
-     
+        public Color GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Color color)
         {
             _colorDal.Update(color);
