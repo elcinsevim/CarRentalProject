@@ -6,6 +6,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -72,6 +73,11 @@ namespace Business.Concrete
         }
 
         public List<Car> GetByModelYear(string year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
         {
             throw new NotImplementedException();
         }

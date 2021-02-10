@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
@@ -18,6 +19,7 @@ namespace Business.Abstract
         List<Car> GetAllByBrandId(int id);
         List<Car> GetByDailyPrice(decimal min, decimal max);
         List<Car> GetByModelYear(string year);
+        List<CarDetailDto> GetCarDetails();
 
     }
 }
