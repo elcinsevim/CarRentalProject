@@ -66,9 +66,14 @@ namespace Business.Concrete
         }
 
 
+        public List<Car> GetByModelYear(int year)
+        {
+            return _carDal.GetAll(c => c.ModelYear==year);
+        }
+
         public List<Car> GetByModelYear(string year)
         {
-            return _carDal.GetAll(c => c.ModelYear.Contains(year) == true);
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)
