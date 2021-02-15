@@ -6,7 +6,7 @@ using System;
 
 namespace ConsoleUI
 {
-    class Program
+   public class Program
     {
         static void Main(string[] args)
         {
@@ -14,9 +14,9 @@ namespace ConsoleUI
 
             CarManager carManager = new CarManager(new EfCarDal());
             
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
-                Console.WriteLine(car.Description);
+                Console.WriteLine(car.CarName);
             }
 
          
