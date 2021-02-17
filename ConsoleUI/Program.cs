@@ -72,12 +72,12 @@ namespace ConsoleUI
         //    var result = carManager.Add(new Car { BrandId = 3, ColorId = 3, CarName = "Audi", ModelYear = 2020, DailyPrice = 13000, Description = "Audi Automatic Gear" });
         //    Console.WriteLine(result.Message);
         //}
-        private static void TestDeleteCar(CarManager carManager)
-        {
+        //private static void TestDeleteCar(CarManager carManager)
+        //{
 
-            var result = carManager.Delete(new Car { CarId = 3 });
-            Console.WriteLine(result.Message);
-        }
+        //    var result = carManager.Delete(new Car { CarId = 3 });
+        //    Console.WriteLine(result.Message);
+        //}
 
     }
 }
