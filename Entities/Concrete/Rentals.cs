@@ -7,7 +7,7 @@ namespace Entities.Concrete
 {
   public  class Rentals:IEntity
     {
-        public int Id{ get; set; }
+        public int RentalId{ get; set; }
         public int CarId { get; set; }
         public int CustomerId { get; set; }
         public DateTime RentDate { get; set; }

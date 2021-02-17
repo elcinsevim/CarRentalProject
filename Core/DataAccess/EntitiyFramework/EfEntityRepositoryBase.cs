@@ -32,9 +32,12 @@ namespace Core.DataAccess.EntitiyFramework
             }
         }
 
-        public List<TEntity> Get(Func<object, bool> p)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().SingleOrDefault(filter);
+            }
         }
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> expressionFilter = null)

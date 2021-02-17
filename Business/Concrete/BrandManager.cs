@@ -18,20 +18,21 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-        public IResult Add(Brand brand)
+        public IResult Add(Brand brand)                                            
         {
             if (brand.BrandName.Length > 2)
             {
-                _brandDal.Add(brand);
-                return new SuccessResult(Messages.Added);
+               
+                return new ErrorResult(Messages.NotAdded);
 
             }
-            else
+            _brandDal.Add(brand);
+          
             {
-                return new ErrorResult(Messages.Added);
+                return new SuccessResult(Messages.Added);
             }
-       
-        }
+
+            }
 
         public IResult Delete(Brand brand)
         {
@@ -48,21 +49,28 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
+        public IDataResult<Brand> GetByBrandId(int brandId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<Brand>  GetById(int id)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.b.Id== id));
+            return new SuccessDataResult<Brand>(_brandDal.Get(b=>b.BrandId == id));
         }
 
         public IResult Update(Brand brand)
         {
             if (brand.BrandName.Length >= 2)
             {
-                _brandDal.Update(brand);
-                return new Result(true, "marka güncellendi");
+
+                return new ErrorResult(Messages.NotUpdated);
             }
-            else
+
+            _brandDal.Update(brand);
+           
             {
-                return new Result(false,"Lütfen marka isminin uzunluğunu 1 karakterden fazla giriniz. Girdiğiniz marka ismi : {brand.BrandName}");
+                return new SuccessResult(Messages.Updated);
             }
         
         }

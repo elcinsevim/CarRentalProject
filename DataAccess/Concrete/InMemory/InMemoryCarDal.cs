@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal : ICarDal
     {
-        private List<Car> _car;
+        private List<Car> _car;// (: teşekküre ederim :D
         public InMemoryCarDal()
         {
             _car = new List<Car>
@@ -60,6 +61,11 @@ namespace DataAccess.Concrete.InMemory
         public Car GetById(Expression<Func<Car, bool>> expressionFilter)
         {
             return _car.SingleOrDefault(expressionFilter.Compile());
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)

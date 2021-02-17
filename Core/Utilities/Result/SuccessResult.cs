@@ -6,11 +6,11 @@ namespace Core.Utilities.Result
 {
     public class SuccessResult : Result
     {
-        public SuccessResult(string message) : base(true, message)
+        public SuccessResult(string message) : base(true, message)//mesaj vermek isterse
         {
-
+            //üst altıda karsılar
         }
-        public SuccessResult() : base(true)
+        public SuccessResult() : base(true)//mesaj vermek istemiyorsa
         {
 
         }

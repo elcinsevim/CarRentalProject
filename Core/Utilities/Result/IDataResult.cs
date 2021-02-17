@@ -4,19 +4,11 @@ using System.Text;
 
 namespace Core.Utilities.Result
 {
-    public interface IDataResult2<T>
-    {
-        T Data { get; }
-    }
 
-    public interface IDataResult3<T>
-    {
-        T Data { get; }
-    }
-
-    public interface IDataResult<T> : IResult
-    {
+    public interface IDataResult<T> : IResult//true ve false ilave t türünde data olacak
+     {  //datada burada arabalarımız
         //success ve messageye ilave bu
-        T Data { get; }
+      T Data { get; }
+        //hem mesajı hemde dondureceği seyi ,hemde datayı içeren
     }
 }

@@ -23,19 +23,16 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.DailyPrice > 0 )
+            if (car.DailyPrice >0)
             {
-                _carDal.Add(car);
-                return new Result(true, "ekleme başarılı");
+                  return new SuccessResult(Messages.Added);   
+               //constructora değer ver bitir daha kısa
             }
-            else
-            {
-               return new Result(false," Lütfen günlük fiyat kısmını 0'dan büyük giriniz. Girdiğiniz değer : {car.DailyPrice}");
-            }
-            return new SuccessResult();
-
+            _carDal.Add(car);
+           
+           
+               return new ErrorResult(Messages.CarDaily);
         }
-
 
         public IResult Delete(Car car)
         {
@@ -46,8 +43,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>>GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+            if (DateTime.Now.Hour >9 || DateTime.Now.Hour<10) // Saturday is weekend, throw error result
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
+
+        //içerisinde listofcarolan ve işlem döndüren demek
 
         public IDataResult< List<Car> >GetAllByBrandId(int id)
         {
@@ -66,7 +67,7 @@ namespace Business.Concrete
 
         }
 
-        public IDataResult< Car> GetById(int id)
+        public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(p => p.CarId == id));
         }
@@ -74,29 +75,29 @@ namespace Business.Concrete
 
         public IDataResult< List<Car> >GetByModelYear(int year)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear.Contains(year) == true));
-        }
-
-        public IDataResult<  List<Car>> GetByModelYear(string year)
-        {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear.Contains(year) == true));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear == year)); // bu nasıl çalışıyor bilmiyorum //tamamdır bakayım ben az daha bu kadar oldu en azından :D
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetail()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetail());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
             if (car.DailyPrice > 0)
             {
-                _carDal.Update(car);
-                Console.WriteLine("Araba bilgisi sistemde güncellendi");
+                return new ErrorResult(Messages.NotUpdated);
+
+                
             }
-            else
-            {
-                Console.WriteLine("günlük limit 0 dan büyük olmalı");
+            _carDal.Update(car);
+
+            return new SuccessResult(Messages.Updated);
+
+               
+                
             }
+            
         }
     }
-}
+
