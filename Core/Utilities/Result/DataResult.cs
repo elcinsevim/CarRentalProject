@@ -16,7 +16,7 @@ namespace Core.Utilities.Result
         {
             Data = data;
         }
-        //mis gibi oldu :D valla baya karıstırmısım :D
+
 
     }
 }
