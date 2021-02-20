@@ -20,7 +20,7 @@ namespace ConsoleUI
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
 
-            //TestCarRentalApplication(carManager);
+            TestCarRentalApplication(carManager);
             //TestGetAllCars(carManager);
             //TestGetCarById(carManager); 
             //TestAddCar(carManager);

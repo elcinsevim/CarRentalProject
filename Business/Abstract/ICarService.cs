@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
-        //void yerine ıresult diyeceğiz..
+        
         IResult Add(Car car);
         IResult Update(Car car);
         IResult Delete(Car car);
