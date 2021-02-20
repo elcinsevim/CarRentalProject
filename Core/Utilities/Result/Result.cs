@@ -13,7 +13,7 @@ namespace Core.Utilities.Result
 
         public Result (bool success,string message):this (success)
         {
-            Message = message; //aşağıdaki mesajı mesaj larak set et
+            Message = message; 
         }
 
         public Result(bool success)
