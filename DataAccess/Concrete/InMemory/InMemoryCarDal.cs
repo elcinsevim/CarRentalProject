@@ -11,6 +11,7 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal : ICarDal
     {
+        //
         private List<Car> _car;
         public InMemoryCarDal()
         {
