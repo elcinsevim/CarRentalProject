@@ -44,7 +44,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>>GetAll()
         {
-            if (DateTime.Now.Hour >9 || DateTime.Now.Hour<10) // Saturday is weekend, throw error result
+            if (DateTime.Now.Hour >15|| DateTime.Now.Hour<16) // Saturday is weekend, throw error result
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
