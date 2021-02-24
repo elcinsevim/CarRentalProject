@@ -9,6 +9,8 @@ using Entities.Concrete;
 using Entities.DTOs;
 using Core.Utilities.Result;
 using Business.Constants;
+using FluentValidation;
+using Business.ValidationRules.FluentValidation;
 
 namespace Business.Concrete
 {
@@ -23,15 +25,18 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.DailyPrice >0)
+
+            var context = new ValidationContext<Car>(car);
+            CarValidator carValidator = new CarValidator();
+            var result = carValidator.Validate(context);
+            if (!result.IsValid)
             {
-                  return new SuccessResult(Messages.Added);   
-               //constructora değer ver bitir daha kısa
+                throw new ValidationException(result.Errors);
             }
             _carDal.Add(car);
            
            
-               return new ErrorResult(Messages.CarDaily);
+               return new SuccessResult(Messages.Added);
         }
 
         public IResult Delete(Car car)
@@ -44,7 +49,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>>GetAll()
         {
-            if (DateTime.Now.Hour >15|| DateTime.Now.Hour<16) // Saturday is weekend, throw error result
+            if (DateTime.Now.Hour >19|| DateTime.Now.Hour<20) // Saturday is weekend, throw error result
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
@@ -85,12 +90,16 @@ namespace Business.Concrete
         }
         public IResult Update(Car car)
         {
-            if (car.DailyPrice > 0)
-            {
-                return new ErrorResult(Messages.NotUpdated);
 
-                
+
+            var context = new ValidationContext<Car>(car);
+            CarValidator carValidator = new CarValidator();
+            var result = carValidator.Validate(context);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
             }
+
             _carDal.Update(car);
 
             return new SuccessResult(Messages.Updated);

@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +24,14 @@ namespace Business.Concrete
 
 
         {
+
+            var context = new ValidationContext<Customers>(customer);
+            CustomerValidator colorValidator = new CustomerValidator();
+            var result = colorValidator.Validate(context);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
             _customerDal.Add(customer);
             return new SuccessResult(Messages.Added);
         }

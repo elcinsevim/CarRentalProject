@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +22,13 @@ namespace Business.Concrete
         public IResult Add(Users users)
         {
 
+            var context = new ValidationContext<Users>(users);
+            UserValidator colorValidator = new UserValidator();
+            var result = colorValidator.Validate(context);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
             _userDal.Add(users);
             return new SuccessResult();
         }
