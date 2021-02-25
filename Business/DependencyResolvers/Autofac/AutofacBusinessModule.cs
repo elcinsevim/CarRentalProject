@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Business.DependencyResolvers.Autofac
 {
   public class AutofacBusinessModule : Module
@@ -41,6 +42,8 @@ namespace Business.DependencyResolvers.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
+
+
 
 
         }
