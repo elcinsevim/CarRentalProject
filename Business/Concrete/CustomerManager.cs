@@ -26,8 +26,8 @@ namespace Business.Concrete
         {
 
             var context = new ValidationContext<Customers>(customer);
-            CustomerValidator colorValidator = new CustomerValidator();
-            var result = colorValidator.Validate(context);
+            CustomerValidator customerValidator = new CustomerValidator();
+            var result = customerValidator.Validate(context);
             if (!result.IsValid)
             {
                 throw new ValidationException(result.Errors);
