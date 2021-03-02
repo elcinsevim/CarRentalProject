@@ -17,5 +17,6 @@ namespace Business.Constants
         public static string NotUpdated = "the product could not be updated.";
         public static string ProductList = "products listed";
         public static string MaintenanceTime = "The time for listing products has passed.";
+        public static string CarImageLimitExceeded = "Car Image Limit Exceeded!";
     }
 }
