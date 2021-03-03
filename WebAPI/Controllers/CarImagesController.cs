@@ -11,13 +11,13 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarImages : ControllerBase
+    public class CarImagesController : ControllerBase
     {
         ICarsImagesService _carsImagesService;
 
        
 
-        public CarImages(ICarsImagesService  carsImagesService)
+        public CarImagesController(ICarsImagesService  carsImagesService)
         {
             _carsImagesService = carsImagesService;
         }
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _carsImagesService.GetById(id);
+            var result = _carsImagesService.GetImagesByCarId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -44,9 +44,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImages carImages)
+        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImages)
         {
-            var result = _carsImagesService.Add(file, carImages);
+            var result = _carsImagesService.Add(file,carImages);
 
             if (result.Success)
             {
@@ -60,8 +60,8 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete([FromForm] int id)
         {
-            var carImage = _carsImagesService.GetById(id).Data;
-            var result = _carsImagesService.Delete(carImage);
+            var carImages = _carsImagesService.GetImagesByCarId(id).Data;
+            var result = _carsImagesService.Delete(carImages);
 
             if (result.Success)
             {
@@ -70,6 +70,7 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
 
 
     }

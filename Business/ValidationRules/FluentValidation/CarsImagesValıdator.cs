@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-   public  class CarsImagesValidator: AbstractValidator<CarImages>
+   public  class CarsImagesValidator: AbstractValidator<CarImage>
     {
         public CarsImagesValidator()
         {
@@ -15,4 +15,4 @@ namespace Business.ValidationRules.FluentValidation
         }
     }
 }
-}
+

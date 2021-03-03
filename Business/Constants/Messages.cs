@@ -18,5 +18,7 @@ namespace Business.Constants
         public static string ProductList = "products listed";
         public static string MaintenanceTime = "The time for listing products has passed.";
         public static string CarImageLimitExceeded = "Car Image Limit Exceeded!";
+        public static string AddadCarImage = "Car Image Added";
+        public static string DeleteCarImage = "Car Image Deleted";
     }
 }

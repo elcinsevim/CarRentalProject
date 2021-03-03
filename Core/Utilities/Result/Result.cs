@@ -7,8 +7,8 @@ namespace Core.Utilities.Result
 {
   public  class Result:IResult
     {
-        private bool message; //çck
-        private string success;
+        //private string message; //çck
+        //private bool success;
 
 
         public Result (bool success,string message):this (success)

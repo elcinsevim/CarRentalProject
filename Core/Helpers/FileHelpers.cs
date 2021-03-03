@@ -9,22 +9,36 @@ namespace Core.Helpers
 {
   public  class FileHelpers
     {
-
+        //public static string Add(IFormFile file)
+        //{
+        //    var sourcepath = Path.GetTempFileName();
+        //    if (file.Length > 0)
+        //    {
+        //        using (var stream = new FileStream(sourcepath, FileMode.Create))
+        //        {
+        //            file.CopyTo(stream);
+        //        }
+        //    }
+        //    var result = newPath(file);
+        //    File.Move(sourcepath, result);
+        //    return result;
+        //}
+        static string directory = Directory.GetCurrentDirectory() + @"\wwwroot\";
+        static string path = @"Images\";
         public static string Add(IFormFile file)
         {
-            string sourcePath = Path.GetTempFileName();
-
-            if (file.Length > 0)
+            string extension = Path.GetExtension(file.FileName).ToUpper();
+            string newFileName = Guid.NewGuid().ToString("N") + extension;
+            if (!Directory.Exists(directory))
             {
-                using (var stream = new FileStream(sourcePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
+                Directory.CreateDirectory(directory);
             }
-
-            string destFileName = CreateNewFilePath(file);
-            File.Move(sourcePath, destFileName);
-            return destFileName;
+            using (FileStream fileStream = File.Create(directory + path + newFileName))
+            {
+                file.CopyToAsync(fileStream);
+                fileStream.Flush();
+            }
+            return (path + newFileName).Replace("\\", "/");
         }
 
         public static IResult Delete(string path)
@@ -40,11 +54,9 @@ namespace Core.Helpers
 
             return new SuccessResult();
         }
-
         public static string Update(string sourcePath, IFormFile file)
         {
-            string result = CreateNewFilePath(file);
-
+            var result = newPath(file);
             if (sourcePath.Length > 0)
             {
                 using (var stream = new FileStream(result, FileMode.Create))
@@ -52,21 +64,20 @@ namespace Core.Helpers
                     file.CopyTo(stream);
                 }
             }
-
             File.Delete(sourcePath);
             return result;
         }
-
-        public static string CreateNewFilePath(IFormFile file)
+        public static string newPath(IFormFile file)
         {
-            FileInfo fileInfo = new FileInfo(file.FileName);
-            string fileExtension = fileInfo.Extension;
+            FileInfo ff = new FileInfo(file.FileName);
+            string fileExtension = ff.Extension;
 
-            string path = Environment.CurrentDirectory + @"\Images";
-            string newPath = Guid.NewGuid().ToString() + fileExtension;
+            string path = Environment.CurrentDirectory + @"\wwwroot\Images";
+            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
 
             string result = $@"{path}\{newPath}";
             return result;
         }
+
     }
 }
