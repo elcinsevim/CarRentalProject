@@ -25,7 +25,7 @@ namespace Business.Concrete
         {
             _carImagesDal = carsImagesDal;
         }
-
+      
         public IResult Add(IFormFile file, CarImage carImage)
         {
 
