@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
+using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,38 +20,44 @@ namespace Business.Concrete
             _userDal = userDal;
         }
     
-        public IResult Add(Users users)
+        public IResult Add(User user)
         {
 
-            var context = new ValidationContext<Users>(users);
-            UserValidator userValidator = new UserValidator();
-            var result = userValidator.Validate(context);
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-            _userDal.Add(users);
+       
+           
+            _userDal.Add(user);
             return new SuccessResult();
         }
 
-        public IResult Delete(Users users)
+        public IResult Delete(User user)
         {
-            _userDal.Delete(users);
+            _userDal.Delete(user);
             return new SuccessResult();
         }
-        public IDataResult<List<Users>> GetAll()
+        public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<Users>>(_userDal.GetAll());
+            return new SuccessDataResult<List<User>>(_userDal.GetAll());
         }
-            public IDataResult<Users> GetById(int UserId)
+            public IDataResult<User> GetById(int UserId)
         {
-            return new SuccessDataResult<Users>(_userDal.Get(b => b.UserId == UserId));
+            return new SuccessDataResult<User>(_userDal.Get(b => b.Id == UserId));
         }
 
-        public IResult Update(Users users)
+        public IResult Update(User user)
         {
-            _userDal.Update(users);
+            _userDal.Update(user);
             return new SuccessResult();
         }
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user), "Roller geldi");
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+
     }
 }
