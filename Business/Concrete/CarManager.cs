@@ -11,6 +11,8 @@ using Core.Utilities.Result;
 using Business.Constants;
 using FluentValidation;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -34,9 +36,9 @@ namespace Business.Concrete
                 throw new ValidationException(result.Errors);
             }
             _carDal.Add(car);
-           
-           
-               return new SuccessResult(Messages.Added);
+
+
+            return new SuccessResult(Messages.Added);
         }
 
         public IResult Delete(Car car)
@@ -47,31 +49,32 @@ namespace Business.Concrete
 
         }
         [CacheAspect]//key,value
-        public IDataResult<List<Car>>GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour >19|| DateTime.Now.Hour<20) // Saturday is weekend, throw error result
+            if (DateTime.Now.Hour > 19 || DateTime.Now.Hour < 20) // Saturday is weekend, throw error result
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
         //içerisinde listofcarolan ve işlem döndüren demek
 
-        public IDataResult< List<Car> >GetAllByBrandId(int id)
+        public IDataResult<List<Car>> GetAllByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
-        public IDataResult< List<Car>> GetAllByColorId(int id)
+        public IDataResult<List<Car>> GetAllByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
 
         }
 
-        public IDataResult< List<Car>> GetByDailyPrice(decimal min, decimal max)
+        public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max));
 
         }
+        [CacheAspect]
 
         public IDataResult<Car> GetById(int id)
         {
@@ -79,7 +82,7 @@ namespace Business.Concrete
         }
 
 
-        public IDataResult< List<Car> >GetByModelYear(int year)
+        public IDataResult<List<Car>> GetByModelYear(int year)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear == year)); // bu nasıl çalışıyor bilmiyorum //tamamdır bakayım ben az daha bu kadar oldu en azından :D
         }
@@ -88,6 +91,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
+
+        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
 
@@ -104,10 +110,10 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.Updated);
 
-               
-                
-            }
-            
+
+
         }
+ 
     }
+}
 
