@@ -46,7 +46,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Deleted);
 
         }
-
+        [CacheAspect]//key,value
         public IDataResult<List<Car>>GetAll()
         {
             if (DateTime.Now.Hour >19|| DateTime.Now.Hour<20) // Saturday is weekend, throw error result
